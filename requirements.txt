@@ -8,3 +8,4 @@ pytube
 flask
 gunicorn
 xmltodict
+bs4
