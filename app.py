@@ -104,7 +104,8 @@ def handle_responsee(**data):
                     temp.write(data)
                     temp.close()
                     uploaded = None
-                    if loged:
+                    while loged:
+                        if uploaded:break
                         try:
                             uploaded = cli.upload_file_draft(tmpn)[1]['url']
                         except Exception as ex:
