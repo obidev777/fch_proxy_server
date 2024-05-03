@@ -89,8 +89,10 @@ def handle_responsee(**data):
         if not stream:
             data = b''
             bytesread = 0
+            t = time.time()
             for chunk in resp.iter_content(1024):
-                print(sizeof_fmt(bytesread))
+                if time.time() - t >= 1:
+                    print(sizeof_fmt(bytesread))
                 if (time.time()-REQUESTS[id]['timespan'])>=close_time or not loged:
                     close_request = True
                 data+=chunk
