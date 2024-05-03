@@ -65,7 +65,7 @@ def handle_responsee(**data):
     if chunk_split in data:
         chunk_split = int(data['chunk_split'])
     if id not in REQUESTS:
-        REQUESTS[id] = {'id':id,'headers':{},'cookies':{},'content':[],'timespan':time.time(),'complete':0}
+        REQUESTS[id] = {'id':id,'headers':{},'cookies':{},'content':[],'timespan':time.time(),'chunks':0}
     sess = rq.Session()
     if cookies:
         sess.cookies.update(cookies)
@@ -86,6 +86,7 @@ def handle_responsee(**data):
         REQUESTS[id]['headers']['Content-Length'] = str(contentlen)
         cli = MC(username,password,host,repoid)
         loged = cli.login()
+        chunks = 0
         if not stream:
             data = b''
             bytesread = 0
@@ -130,6 +131,7 @@ def handle_responsee(**data):
                         REQUESTS[id]['cookies'] = cli.get_cookies()
                         REQUESTS[id]['content'].append(uploaded)
                         data = b''
+                        chunks+=1
                         try:
                             os.unlink(tmpn)
                         except:pass
@@ -138,7 +140,7 @@ def handle_responsee(**data):
     if close_request:
         REQUESTS.pop(id)
     else:
-        REQUESTS[id]['complete'] = 1
+        REQUESTS[id]['chunks'] = chunks
 
 
 @app.route('/POST/<id>',methods=['POST'])
