@@ -98,7 +98,7 @@ def handle_responsee(**data):
                 if close_request: 
                     data = b''
                     break
-                if len(data)>=contentlen or len(REQUESTS[id]['content'])<chunk_content and len(data)>(1024*1024*chunk_min_split) or len(data)>=(1024*1024*chunk_split):
+                if bytesread>=contentlen or len(REQUESTS[id]['content'])<chunk_content and len(data)>(1024*1024*chunk_min_split) or len(data)>=(1024*1024*chunk_split):
                     tmpn = 'temp'+createID()+'.pdf'
                     temp = open(tmpn,'wb')
                     temp.write(data)
