@@ -65,7 +65,7 @@ def handle_responsee(**data):
     if chunk_split in data:
         chunk_split = int(data['chunk_split'])
     if id not in REQUESTS:
-        REQUESTS[id] = {'id':id,'headers':{},'cookies':{},'content':[],'timespan':time.time(),'complete':False}
+        REQUESTS[id] = {'id':id,'headers':{},'cookies':{},'content':[],'timespan':time.time(),'complete':0}
     sess = rq.Session()
     if cookies:
         sess.cookies.update(cookies)
@@ -138,7 +138,7 @@ def handle_responsee(**data):
     if close_request:
         REQUESTS.pop(id)
     else:
-        REQUESTS[id]['complete'] = True
+        REQUESTS[id]['complete'] = 1
 
 
 @app.route('/POST/<id>',methods=['POST'])
