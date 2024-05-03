@@ -1,9 +1,8 @@
-https://github.com/obidev777/pyobigram/archive/master.zip
+gunicorn
 aiohttp
 requests[socks]
 requests_toolbelt
 aiohttp_socks
-https://github.com/obidev777/pyobidl/archive/master.zip
 tenacity
 pytube
 flask
